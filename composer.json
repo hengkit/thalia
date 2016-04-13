@@ -1,0 +1,12 @@
+{
+    "require": {
+        "slim/slim": "3.x",
+        "pantheon-systems/terminus": ">=0.11"
+    },
+    "extra": {
+        "heroku": {
+            "document-root": "v1",
+            "index-document": "index.php"
+        }
+    }
+}
