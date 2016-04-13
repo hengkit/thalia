@@ -1,3 +1,3 @@
 # thalia
 
-microservice API for terminus
+Rest Wrapper for terminus

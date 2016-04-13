@@ -1,7 +1,7 @@
 {
     "require": {
         "slim/slim": "3.x",
-        "pantheon-systems/terminus": ">=0.11"
+        "pantheon-systems/terminus": "0.11.1"
     },
     "extra": {
         "heroku": {
