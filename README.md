@@ -6,49 +6,27 @@ Rest Wrapper for terminus
 
 ## Utility Operations
 
-|Resource|Verb|Payload|Terminus Command|
-|--------|----|-------|----------------|
-|/terminus/cli/version|GET||`terminus cli version`|
+|Verb|Resource|Payload|Terminus Command|Notes|
+|--------|----|-------|----------------|-----|
+|GET|/terminus/cli/version||`terminus cli version`|Returns terminus version|
+|GET|/terminus/auth||`terminus auth whoami`|Returns logged in user information|
+|POST|/terminus/auth/login||`terminus auth login`||
+|POST|/terminus/auth/logout||`terminus auth logout`||
 
-
-**GET** 
-
-Returns terminus version, wraps `terminus cli version`
-
-**GET** /terminus/auth
-
-Returns logged in user information or 404 if not logged in, wraps `terminus auth whoami`
-
-**POST** /terminus/auth/login
-
-**POST** /terminus/auth/logout
 
 ## Site Operations
-**GET** /terminus/site/{siteName}
+|Verb|Resource|Payload|Terminus Command|Notes|
+|--------|----|-------|----------------|-----|
+|GET|/terminus/site/{siteName}/?{optional:fieldName}||`terminus site info`||
+|GET|/terminus/site/{siteName}/env||`terminus site environments`||
+|DELETE|/terminus/site/{siteName}||`terminus site delete`||
+|GET|/terminus/site/{siteName}/env/{envName}?{optional:fieldName}||`terminus site environment-info`||
+|POST|/terminus/site/{siteName}/env/{envName}||`terminus site create-env`||
+|DELETE|/terminus/site/{siteName}/env/{envName}||`terminus site delete-env`||
 
-**GET** /terminus/site/{siteName}/{fieldName}
+##Sites Operations (Don't judge me, it's pragmatic)
 
-{fieldName} is optional. Returns site information or 404 if site not found, wraps `terminus site info`
-
-**GET** /terminus/site/{siteName}/env
-
-
-**DELETE** /terminus/site/{siteName}
-
-Deletes site. Wraps `terminus site delete`
-
-**GET** /terminus/site/{siteName}/env/{envName}
-
-**GET** /terminus/site/{siteName}/env/{envName}/{fieldName}
-
-{fieldName} is optional. Returns  environment information or 404 if site not found, wraps `terminus site environment-info`
-
-**POST** /terminus/site/{siteName}/env/{envName}
-
-**DELETE** /terminus/site/{siteName}/env/{envName}
-
-**GET** /terminus/sites
-
-**POST** /terminus/sites/{siteName}
-
-Returns 201 if site is created, 409 if site already exists, wraps `terminus sites create`
+|Verb|Resource|Payload|Terminus Command|Notes|
+|--------|----|-------|----------------|-----|
+|GET|/terminus/sites||`terminus sites list`||
+|POST|/terminus/sites/{siteName}||`terminus sites create`||
