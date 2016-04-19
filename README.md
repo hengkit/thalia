@@ -6,7 +6,12 @@ Rest Wrapper for terminus
 
 ## Utility Operations
 
-**GET** /terminus/cli/version
+|Resource|Verb|Payload|Terminus Command|
+|--------|----|-------|----------------|
+|/terminus/cli/version|GET||`terminus cli version`|
+
+
+**GET** 
 
 Returns terminus version, wraps `terminus cli version`
 
