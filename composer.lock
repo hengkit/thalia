@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b6e5ede26d4fc9efa3f53f0ca2e49ab7",
-    "content-hash": "88dc48f2244b6f6b052976b0092d0015",
+    "hash": "f814870d508c4d9f79e81d157c6321a5",
+    "content-hash": "cbcb3a60371403a4d7887675c5e30c00",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -237,6 +237,50 @@
                 "uri"
             ],
             "time": "2016-04-13 19:56:01"
+        },
+        {
+            "name": "heroku/heroku-buildpack-php",
+            "version": "v101",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/heroku/heroku-buildpack-php.git",
+                "reference": "efca12bb59ccdebec79cabddd94e7c1ef51de908"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/heroku/heroku-buildpack-php/zipball/efca12bb59ccdebec79cabddd94e7c1ef51de908",
+                "reference": "efca12bb59ccdebec79cabddd94e7c1ef51de908",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/heroku-hhvm-apache2",
+                "bin/heroku-hhvm-nginx",
+                "bin/heroku-php-apache2",
+                "bin/heroku-php-nginx"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Zuelke",
+                    "email": "dz@heroku.com"
+                }
+            ],
+            "description": "Toolkit for starting a PHP application locally, with or without foreman, using the same config for PHP/HHVM and Apache2/Nginx as on Heroku",
+            "homepage": "http://github.com/heroku/heroku-buildpack-php",
+            "keywords": [
+                "apache",
+                "apache2",
+                "foreman",
+                "heroku",
+                "hhvm",
+                "nginx",
+                "php"
+            ],
+            "time": "2016-04-12 02:41:29"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -516,16 +560,16 @@
         },
         {
             "name": "pantheon-systems/terminus",
-            "version": "0.11.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pantheon-systems/terminus.git",
-                "reference": "7557cb2587ab03ebbef0289aad272bc8c359fc48"
+                "reference": "a4be4c7bd2749dd802ccc3ede0df968052a82714"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pantheon-systems/terminus/zipball/7557cb2587ab03ebbef0289aad272bc8c359fc48",
-                "reference": "7557cb2587ab03ebbef0289aad272bc8c359fc48",
+                "url": "https://api.github.com/repos/pantheon-systems/terminus/zipball/a4be4c7bd2749dd802ccc3ede0df968052a82714",
+                "reference": "a4be4c7bd2749dd802ccc3ede0df968052a82714",
                 "shasum": ""
             },
             "require": {
@@ -579,7 +623,7 @@
                 "terminus",
                 "wordpress"
             ],
-            "time": "2016-03-30 23:16:53"
+            "time": "2016-04-26 17:14:18"
         },
         {
             "name": "pimple/pimple",
@@ -1290,23 +1334,23 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "9caf304153dc2288e4970caec6f1f3b3bc205412"
+                "reference": "63f37b9395e8041cd4313129c08ece896d06ca8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/9caf304153dc2288e4970caec6f1f3b3bc205412",
-                "reference": "9caf304153dc2288e4970caec6f1f3b3bc205412",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/63f37b9395e8041cd4313129c08ece896d06ca8e",
+                "reference": "63f37b9395e8041cd4313129c08ece896d06ca8e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8|^5.0"
+                "phpunit/phpunit": "^4.8 || ^5.0"
             },
             "type": "library",
             "extra": {
@@ -1321,7 +1365,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "BSD"
+                "BSD-3-Clause-Attribution"
             ],
             "authors": [
                 {
@@ -1331,19 +1375,20 @@
                 }
             ],
             "description": "Loads environment variables from `.env` to `getenv()`, `$_ENV` and `$_SERVER` automagically.",
-            "homepage": "http://github.com/vlucas/phpdotenv",
             "keywords": [
                 "dotenv",
                 "env",
                 "environment"
             ],
-            "time": "2015-12-29 15:10:30"
+            "time": "2016-04-15 10:48:49"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "pantheon-systems/terminus": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

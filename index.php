@@ -10,13 +10,19 @@ use \Terminus\Session;
 $app = new \Slim\App;
 
 $app->post('/terminus/auth/login', function ($request, $response, $args) {
+  try {
     $authPayload = $request->getParsedBody();
+    $terminusArgs['email']=$authPayload['email'];
+    $terminusArgs['token'] = getenv('TERMINUS_TOKEN');
     $auth = new Auth();
-    //TODO: FIX THIS TO USE HEROKU ENVIRONMENT VARIABLE
-    $auth->logInViaMachineToken($authPayload['authentication']['token'],$authPayload['authentication']['email']);
-    return $response->write($auth);
+    $auth->logInViaMachineToken($terminusArgs);
+    $response->withStatus(200);
+  } catch (Exception $e) {
+    $response->withStatus(403);
+  }
+  return $response;
 });
-
+// There is no logout function, have to invalidate session
 $app->post('/terminus/auth/logout', function ($request, $response, $args) {
     $auth = new Auth();
     $auth->logout();
@@ -27,12 +33,11 @@ $app->get('/terminus/auth/whoami', function ($request, $response, $args) {
     $user = Session::getUser();
     $user->fetch();
     $data = $user->serialize();
-    $this->output()->outputRecord($data);
+    $response->withJson($data);
   } else {
-    $this->failure('You are not logged in.');
+    $response->withStatus(403);
   }
-
-    return $response->write($this);
+  return $response;
 });
 $app->get('/ping', function ($request, $response, $args) {
     return $response->write("pong");
