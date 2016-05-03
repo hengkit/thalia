@@ -13,14 +13,16 @@ $app->post('/terminus/auth/login', function ($request, $response, $args) {
   try {
     $authPayload = $request->getParsedBody();
     $terminusArgs['email']=$authPayload['email'];
-    $terminusArgs['token'] = getenv('TERMINUS_TOKEN');
+    $terminusArgs['token'] = getenv('TERMINUS_TOKE');
     $auth = new Auth();
     $auth->logInViaMachineToken($terminusArgs);
     $response->withStatus(200);
+    return $response;
   } catch (Exception $e) {
     $response->withStatus(403);
+    return $response;
   }
-  return $response;
+
 });
 // There is no logout function, have to invalidate session
 $app->post('/terminus/auth/logout', function ($request, $response, $args) {
