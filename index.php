@@ -8,8 +8,7 @@ use \Terminus\Models\Auth;
 use \Terminus\Commands\AuthCommand;
 use \Terminus\Commands\TerminusCommand;
 use Terminus\Runner;
-use \Terminus\Commands\SiteCommand;
-use \Terminus\Session;
+use \Terminus\Commands\SitesCommand;
 
 //$app = new \Slim\App;
 $app = new \Slim\App([
@@ -17,7 +16,7 @@ $app = new \Slim\App([
         'displayErrorDetails' => true
     ]
 ]);
-//login
+//terminus auth login
 $app->post('/terminus/auth/login', function ($request, $response, $args) {
   try {
     $authPayload = $request->getParsedBody();
@@ -33,34 +32,42 @@ $app->post('/terminus/auth/login', function ($request, $response, $args) {
   }
 
 });
-// logout
+//terminus auth  logout
 $app->post('/terminus/auth/logout', function ($request, $response, $args) {
     $auth = new Auth();
     $auth->logOut();
     return $response->withStatus(200);
 });
-//whoami
+//terminus auth whoami
 $app->get('/terminus/auth/whoami', function ($request, $response, $args) {
   $authCommand = new AuthCommand(['runner' => new Runner()]);
   $me = $authCommand->whoami();
   $response->withJson($me);
   return $response;
 });
-#/terminus/site/{siteName}/env/{envName}
-//terminus site info
-$app->get('/terminus/site/{siteName}/', function ($request, $response, $args) {
-  $siteName=['siteName'=>$args['siteName']];
-  $site=new SiteCommand();
-  $siteinfo = $site->info($siteName);
-  $response->withJson($siteinfo);
-
+//terminus sites show --name
+$app->get('/terminus/sites/{siteName}/', function ($request, $response, $args) {
+  $sitesCommand = new SitesCommand(['runner' => new Runner()]);
+  $meh=null;
+  $info = $sitesCommand->index($meh,['name'=>$args[siteName]]);
+  $response->withJson($info);
   return $response;
 });
 
+
+//terminus site info
+//
+$app->get('/terminus/site/{siteName}/', function ($request, $response, $args) {
+
+  return $response;
+});
+//terminus site info --env
 $app->post('/terminus/site/{siteName}/env/{envName}', function ($request, $response, $args) {
 
   return $response;
 });
+
+//sanity check
 $app->get('/ping', function ($request, $response, $args) {
     return $response->write("pong");
 });
