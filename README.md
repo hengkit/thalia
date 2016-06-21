@@ -1,6 +1,6 @@
 # Thalia
 
-Prototype Rest Wrapper for the [Terminus CLI](https://github.com/pantheon-systems/terminus)
+Prototype Rest Wrapper for the [Terminus CLI](https://github.com/pantheon-systems/terminus) using [Slim Framework 3](http://www.slimframework.com/).
 This is not production level code, merely a POC for using [Terminus as a library](https://github.com/pantheon-systems/terminus/blob/master/docs/Terminus.md)
 
 Only possible with extensive help from [TeslaDethray](https://github.com/tesladethray). She is not responsible for my PHP.
