@@ -10,10 +10,6 @@ use \Terminus\Commands\TerminusCommand;
 use Terminus\Runner;
 use \Terminus\Commands\SitesCommand;
 
-if(!defined('STDIN'))  define('STDIN',  fopen('php://input',  'r'));
-if(!defined('STDOUT')) define('STDOUT', fopen('php://output', 'w'));
-if(!defined('STDERR')) define('STDERR', fopen('php://stderr', 'w'));
-
 $app = new \Slim\App([
     'settings' => [
         'displayErrorDetails' => false,
@@ -41,32 +37,37 @@ $app->post('/terminus/auth/login', function ($request, $response, $args) {
 });
 //terminus auth  logout
 $app->post('/terminus/auth/logout', function ($request, $response, $args) {
-    $auth = new Auth();
-    $auth->logOut();
+    $authCommand = new AuthCommand($this->get('settings')['defaultRunner']);
+    $authCommand->logout();
     return $response->withStatus(200);
 });
 //terminus auth whoami
 $app->get('/terminus/auth/whoami', function ($request, $response, $args) {
-  //$myRunner=['runner' => new Runner(array('format'=> 'json','output'=>'php://output'))];
-  $authCommand = new AuthCommand($this->get('settings')['defaultRunner']);
-  $me = $authCommand->whoami();
-  $response = json_decode($me);
-  //$response->withJson($me);
-  return $response;
+  try {
+    $authCommand = new AuthCommand($this->get('settings')['defaultRunner']);
+    $me = $authCommand->whoami();
+    $response = json_decode($me);
+    //$response->withJson($me);
+    return $response;
+} catch (Exception $e){
+    return $response->withStatus(410);
+}
 });
 //terminus sites show --name
-$app->get('/terminus/sites/{siteName}/', function ($request, $response, $args) {
+//Incomplete. need to handle cases where user in not logged in or site is not found
+$app->get('/terminus/sites/{siteName}', function ($request, $response, $args) {
   $sitesCommand = new SitesCommand($this->get('settings')['defaultRunner']);
   $meh=null;
   $info = $sitesCommand->index($meh,['name'=>$args[siteName]]);
   $response= json_decode($info);
+  echo "$info";
   return $response;
 });
 
 
 //terminus site info
 //
-$app->get('/terminus/site/{siteName}/', function ($request, $response, $args) {
+$app->get('/terminus/site/{siteName}', function ($request, $response, $args) {
 
   return $response;
 });
