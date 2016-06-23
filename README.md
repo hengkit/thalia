@@ -39,8 +39,8 @@ Only possible with extensive help from [TeslaDethray](https://github.com/teslade
 |POST|/terminus/sites/{siteName}||`terminus sites create`||
 
 # Real To-Dos
-* heroku deploy button
-* installation instructions
+* Add drush operations
+* Add WP-CLI operations
 
 #Why Thalia?
 
