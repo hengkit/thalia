@@ -1,0 +1,6 @@
+{
+  "name": "Thalia POC",
+  "description": "A barebones REST wrapper for Terminus",
+  "repository": "https://github.com/hengkit/thalia",
+  "keywords": ["slimframework", "terminus", "pantheon", "drupal","wordpress"]
+}

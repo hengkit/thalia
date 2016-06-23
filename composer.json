@@ -1,8 +1,7 @@
 {
     "require": {
         "slim/slim": "3.x",
-        "pantheon-systems/terminus": "dev-master",
-        "heroku/heroku-buildpack-php": "^101.0"
+        "pantheon-systems/terminus": "dev-master"
     },
     "extra": {
         "heroku": {
