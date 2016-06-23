@@ -13,7 +13,8 @@ Only possible with extensive help from [TeslaDethray](https://github.com/teslade
 3. start the local PHP server with `php -S localhost:8080`
 
 ## Heroku
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+1. Click here [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+2. Add your terminus machine token as a configuration variable named `TERMINUS_TOKEN`
 
 #Operations
 
