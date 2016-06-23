@@ -1,6 +1,6 @@
 {
     "require": {
-        "php": "^5.5.0",
+        "php": "5.5.x",
         "slim/slim": "3.x",
         "pantheon-systems/terminus": "dev-master"
     },
