@@ -5,6 +5,16 @@ This is not production level code, merely a POC for using [Terminus as a library
 
 Only possible with extensive help from [TeslaDethray](https://github.com/tesladethray). She is not responsible for my PHP.
 
+#Installation
+## Local
+
+1. Clone the repo locally
+2. Run `composer install`
+3. start the local PHP server with `php -S localhost:8080`
+
+## Heroku
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 #Operations
 
 |Verb|Resource|Payload|Terminus Command|Notes|
@@ -27,7 +37,7 @@ Only possible with extensive help from [TeslaDethray](https://github.com/teslade
 |GET|/terminus/sites||`terminus sites list`||
 |POST|/terminus/sites/{siteName}||`terminus sites create`||
 
-# Real ToDos
+# Real To-Dos
 * heroku deploy button
 * installation instructions
 
