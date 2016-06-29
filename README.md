@@ -13,7 +13,7 @@ Only possible with extensive help from [TeslaDethray](https://github.com/teslade
 3. start the local PHP server with `php -S localhost:8080`
 
 ## Heroku
-1. Click here [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+1. [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 2. Add your terminus machine token as a configuration variable named `TERMINUS_TOKEN`
 
 #Operations
@@ -37,6 +37,8 @@ Only possible with extensive help from [TeslaDethray](https://github.com/teslade
 |DELETE|/terminus/site/{siteName}/env/{envName}||`terminus site delete-env`||
 |GET|/terminus/sites||`terminus sites list`||
 |POST|/terminus/sites/{siteName}||`terminus sites create`||
+|POST|/drush/{siteName}/{env}|{'command':'version'}|`terminus drush`||
+|POST|/wp/{siteName}/{env}|{'command':'cli info'}|`terminus wp`||
 
 # Real To-Dos
 * Add drush operations

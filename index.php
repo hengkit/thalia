@@ -8,6 +8,7 @@ use \Terminus\Models\Auth;
 use \Terminus\Commands\AuthCommand;
 use \Terminus\Commands\TerminusCommand;
 use \Terminus\Commands\DrushCommand;
+use \Terminus\Commands\WpCommand;
 use Terminus\Runner;
 use \Terminus\Commands\SitesCommand;
 
@@ -77,14 +78,20 @@ $app->post('/drush/{siteName}/{envName}', function ($request, $response, $args) 
     return $response->withStatus(410);
   } else {
     return $response->withStatus(404);
-
   }
   //$resultArray = ['result'=>$result];
   //return $response->withJson($resultArray,202);
 
 });
+//completely untested
 $app->post('/wp/{siteName}/{envName}', function ($request, $response, $args) {
-
+  $wpPayload = $request->getParsedBody();
+  $wpArgs = [ $wpPayload['command']];
+  $wpAssocArgs = ['site' => $args[siteName], 'env' => $args[envName]];
+  $wpCommand = new WpCommand($this->get('settings')['defaultRunner']);
+  $result = $wpCommand->__invoke($wpArgs, $wpAssocArgs);
+  $resultArray = ['result'=>$result];
+  return $response->withJson($resultArray,202);
   return $response;
 });
 //TODO
