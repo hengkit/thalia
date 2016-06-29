@@ -71,6 +71,8 @@ $app->post('/drush/{siteName}/{envName}', function ($request, $response, $args) 
   $drushAssocArgs = ['site' => $args[siteName], 'env' => $args[envName]];
   $drushCommand = new DrushCommand($this->get('settings')['defaultRunner']);
   $result = $drushCommand->__invoke($drushArgs, $drushAssocArgs);
+
+//GAHHHHHHHHH
   if ($result == null){
     return $response->withStatus(410);
   } else {
