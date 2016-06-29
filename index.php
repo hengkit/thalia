@@ -7,6 +7,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 use \Terminus\Models\Auth;
 use \Terminus\Commands\AuthCommand;
 use \Terminus\Commands\TerminusCommand;
+use \Terminus\Commands\DrushCommand;
 use Terminus\Runner;
 use \Terminus\Commands\SitesCommand;
 
@@ -63,17 +64,35 @@ $app->get('/terminus/sites/{siteName}', function ($request, $response, $args) {
   $response= json_decode($info);
   return $response;
 });
+//well this is close to working
+$app->post('/drush/{siteName}/{envName}', function ($request, $response, $args) {
+  $drushPayload = $request->getParsedBody();
+  $drushArgs = [ $drushPayload['command']];
+  $drushAssocArgs = ['site' => $args[siteName], 'env' => $args[envName]];
+  $drushCommand = new DrushCommand($this->get('settings')['defaultRunner']);
+  $result = $drushCommand->__invoke($drushArgs, $drushAssocArgs);
+  if ($result == null){
+    return $response->withStatus(410);
+  } else {
+    return $response->withStatus(404);
 
+  }
+  //$resultArray = ['result'=>$result];
+  //return $response->withJson($resultArray,202);
+
+});
+$app->post('/wp/{siteName}/{envName}', function ($request, $response, $args) {
+
+  return $response;
+});
 //TODO
 //terminus site info
 //
 $app->get('/terminus/site/{siteName}', function ($request, $response, $args) {
-
   return $response;
 });
 //terminus site info --env
 $app->post('/terminus/site/{siteName}/env/{envName}', function ($request, $response, $args) {
-
   return $response;
 });
 
