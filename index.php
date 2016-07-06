@@ -11,14 +11,19 @@ use \Terminus\Commands\DrushCommand;
 use \Terminus\Commands\WpCommand;
 use Terminus\Runner;
 use \Terminus\Commands\SitesCommand;
+use \Terminus\Commands\SiteCommand;
 
+if(!defined('STDERR')) define('STDERR', fopen('php://stdout', 'w'));
+//if(!defined('STDIN'))  define('STDIN',  fopen('php://input',  'r'));
 define(TERMINUS_ROOT, __DIR__ . '/vendor/pantheon-systems/terminus/');
 
 $app = new \Slim\App([
     'settings' => [
-        'displayErrorDetails' => false,
+        'displayErrorDetails' => true,
         'defaultRunner'=>[
-          'runner' => new Runner(array('format'=> 'json','output'=>'php://output'))
+          'runner' => new Runner(array('format'=> 'json','output'=>'php://output')),
+        'silentRunner'=>[
+          'runner' => new Runner(array('format'=> 'silent','output'=>'php://output')),
         ]
     ]
 ]);
@@ -94,6 +99,25 @@ $app->post('/wp/{siteName}/{envName}', function ($request, $response, $args) {
   return $response->withJson($resultArray,202);
   return $response;
 });
+//Create Environment
+$app->post('/terminus/site/{siteName}/env/{envName}', function ($request, $response, $args) {
+  $siteCommand = new SiteCommand($this->get('settings')['defaultRunner']);
+  $meh = null;
+  $info = $siteCommand->createEnv($meh,['site'=>$args[siteName],'to-env'=>$args[envName],'from-env'=>'dev']);
+  $response= json_decode($info);
+  return $response->withStatus(201);
+});
+
+//Delete Environment
+$app->delete('/terminus/site/{siteName}/env/{envName}', function ($request, $response, $args) {
+  $siteCommand = new SiteCommand($this->get('settings')['defaultRunner']);
+  $meh = null;
+  $info = $siteCommand->deleteEnv($meh,['site'=>$args[siteName],'env'=>$args[envName],'yes'=>'yes']);
+  $response= $info;
+  return $response;
+});
+
+
 //TODO
 //terminus site info
 //
@@ -101,7 +125,7 @@ $app->get('/terminus/site/{siteName}', function ($request, $response, $args) {
   return $response;
 });
 //terminus site info --env
-$app->post('/terminus/site/{siteName}/env/{envName}', function ($request, $response, $args) {
+$app->get('/terminus/site/{siteName}/env/{envName}', function ($request, $response, $args) {
   return $response;
 });
 
